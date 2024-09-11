@@ -32,9 +32,12 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   InkWell(
-            onTap: () {
-              Get.to(Homescreen(),transition: Transition.leftToRightWithFade);
-              controller.signIn(controller.txtEmail.text, controller.txtPass.text);
+            onTap: () async {
+              String status=await controller.signIn(controller.txtEmail.text, controller.txtPass.text);
+              if(status=='Success')
+                {
+                  Get.to(Homescreen(),transition: Transition.leftToRightWithFade);
+                }
             },
             child: Center(
               child: Container(

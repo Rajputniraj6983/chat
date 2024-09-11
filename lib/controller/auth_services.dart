@@ -1,4 +1,7 @@
+import 'dart:developer';
+import 'package:chat/view/screen/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 class AuthServices {
  static AuthServices authServices = AuthServices._();
@@ -16,20 +19,37 @@ class AuthServices {
   try{
 
    UserCredential userCredential =
-   await auth.signInWithEmailAndPassword(email: mail, password: pass);
-   print(userCredential.user!.email);
-   getCurrentUser();
-   return 'Success';
-  }catch(e)
-  {
-   return 'fail';
-  }
-
- }
- User? getCurrentUser()
+      await auth.signInWithEmailAndPassword(email: mail, password: pass);
+      log(userCredential.user!.email.toString());
+      getCurrentUser();
+      return 'Success';
+     }catch(e)
+    {
+      return 'fail';
+    }
+   }
+ User? getCurrentUser() {
+   User? user = auth.currentUser;
+   if (user != null)
  {
-  User? user = auth.currentUser;
-  print("${user!.email}------------------------------------------------------------------");
-  return user;
+  // print("${user.email}------------------------------------------------------------------");
  }
+     return user;
+   }
+ Future<void> currentUser() async {
+  User? user = auth.currentUser;
+  if (user == null) {
+   Get.back();
+    }
+ }
+
+ void emailLogOut(){
+   try{
+     auth.signOut();
+     Get.to(SignUp());
+     getCurrentUser();
+   } catch(e){
+     log(e.toString());
+   }
+   }
 }

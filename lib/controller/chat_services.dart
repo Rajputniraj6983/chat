@@ -26,4 +26,36 @@ class ChatServices {
         .orderBy('timestamp', descending: false)
         .snapshots();
   }
+  void updateChat(String message, String chatId, String sender,
+      String receiver) {
+
+    List doc = [sender, receiver];
+    print("$sender----------------------------------------------------$receiver $message");
+    doc.sort();
+    String docId = doc.join('_');
+    FirebaseFirestore.instance
+        .collection('chatbox')
+        .doc(docId)
+        .collection('chat')
+        .doc(chatId)
+        .update({
+      'message': message,
+    });
+  }
+
+  void deleteChat(String chatId, String sender,
+      String receiver) {
+    List doc = [sender, receiver];
+    print("$sender----------------------------------------------------$receiver ");
+    doc.sort();
+    String docId = doc.join('_');
+    FirebaseFirestore.instance
+        .collection('chatbox')
+        .doc(docId)
+        .collection('chat')
+        .doc(chatId)
+        .delete();
+  }
 }
+
+

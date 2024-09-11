@@ -1,9 +1,9 @@
 //import 'package:chat/controller/user_services.dart';
+import 'package:chat/controller/auth_services.dart';
 import 'package:chat/controller/singin_controller.dart';
 import 'package:chat/controller/user_services.dart';
-import 'package:chat/modal/data.dart';
-import 'package:chat/view/screen/chat_screen.dart';
 
+import 'package:chat/view/screen/chat_screen.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:chat/controller/singin_controller.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +24,7 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     AuthController auth = Get.put(AuthController());
     return Scaffold(
+      backgroundColor: Color(0xffF1F1F1),
       appBar: AppBar(
         backgroundColor: Color(0xffF1F1F1),
         automaticallyImplyLeading: false,
@@ -50,6 +51,15 @@ class _HomescreenState extends State<Homescreen> {
                       Icons.document_scanner_rounded,
                       size: 25,
                       color: Colors.black,
+                    ),SizedBox(width: 20,),
+                    InkWell(onTap: () {
+                      AuthServices.authServices.emailLogOut();
+                    },
+                      child: Icon(
+                        Icons.logout,
+                        size: 25,
+                        color: Colors.black,
+                      ),
                     ),
                   ],
                 ),
@@ -183,7 +193,7 @@ class _HomescreenState extends State<Homescreen> {
       ),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-          indicatorColor: Colors.purple.shade50,
+          indicatorColor: Colors.green.shade500,
           labelTextStyle: MaterialStateProperty.all(
             TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
 

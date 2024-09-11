@@ -4,7 +4,6 @@ import 'package:chat/controller/user_services.dart';
 import 'package:chat/modal/modal.dart';
 import 'package:chat/view/screen/Homescreen.dart';
 import 'package:chat/view/screen/login_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
